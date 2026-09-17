@@ -80,9 +80,11 @@ h1{margin:0 0 1.5rem;color:var(--strong);font-weight:800;font-stretch:112%;font-
 .pos[aria-checked="true"] .led{background:var(--amber);box-shadow:0 0 9px var(--amber)}
 .p0{grid-area:1/1;justify-self:end}
 .p1{grid-area:1/3;justify-self:start}
-.p2{grid-area:3/3;justify-self:start}
-.p3{grid-area:3/1;justify-self:end}
-.p0,.p3{flex-direction:row-reverse;text-align:right}
+.p2{grid-area:2/3;justify-self:start}
+.p3{grid-area:3/3;justify-self:start}
+.p4{grid-area:3/1;justify-self:end}
+.p5{grid-area:2/1;justify-self:end}
+.p0,.p4,.p5{flex-direction:row-reverse;text-align:right}
 .knob-wrap{grid-area:1/2/4/3;position:relative;width:clamp(120px,22vw,168px);aspect-ratio:1;border-radius:50%;
   background:repeating-conic-gradient(from 0deg,var(--muted) 0 1deg,transparent 1deg 15deg);padding:10px}
 .knob-wrap::before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--panel)}
@@ -176,7 +178,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
   <div class="wrap hero">
     <div>
       <h1>Vous avez un problème. On bâtit la solution.</h1>
-      <p class="lede">Application, pièce modélisée en 3D, prototype imprimé ou un mélange des trois : S.M.D Solutions transforme une idée ou un irritant du quotidien en quelque chose de concret qui fonctionne.</p>
+      <p class="lede">Site web, application, pièce modélisée en 3D, prototype imprimé, petit montage électronique ou un mélange de tout ça : S.M.D Solutions transforme une idée ou un irritant du quotidien en quelque chose de concret qui fonctionne.</p>
       <div class="actions">
         <a class="btn btn-primary" href="#contact">Parler de votre projet</a>
         <a class="btn" href="#services">Voir les services</a>
@@ -190,10 +192,12 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
         <button class="pos p1" role="radio" aria-checked="false" data-i="1"><span class="led"></span>Modélisation 3D</button>
         <div class="knob-wrap"><button class="knob" id="knob" aria-label="Tourner le sélecteur au service suivant" style="transform:rotate(-45deg)"></button></div>
         <button class="pos p2" role="radio" aria-checked="false" data-i="2"><span class="led"></span>Impression 3D</button>
-        <button class="pos p3" role="radio" aria-checked="false" data-i="3"><span class="led"></span>Sur mesure</button>
+        <button class="pos p3" role="radio" aria-checked="false" data-i="3"><span class="led"></span>Électronique</button>
+        <button class="pos p5" role="radio" aria-checked="false" data-i="5"><span class="led"></span>Sites web</button>
+        <button class="pos p4" role="radio" aria-checked="false" data-i="4"><span class="led"></span>Sur mesure</button>
       </div>
       <div class="readout" aria-live="polite">
-        <div class="code" id="rCode">POS 1/4</div>
+        <div class="code" id="rCode">POS 1/6</div>
         <h2 id="rTitle">Applications web et mobiles</h2>
         <p id="rText">Des outils qui remplacent le papier et les chiffriers, utilisables au bureau comme sur le terrain, même sans réseau.</p>
       </div>
@@ -202,7 +206,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
 
   <section id="services">
     <div class="wrap">
-      <h2 class="sec-title">Quatre façons de régler un problème</h2>
+      <h2 class="sec-title">Six façons de régler un problème</h2>
       <p class="intro">Chaque projet est différent. Souvent, la bonne réponse combine plusieurs de ces services.</p>
       <div class="services">
         <article class="service">
@@ -210,7 +214,15 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
           <div><h3>Applications web et mobiles</h3><p class="for">Pour les entreprises qui veulent sortir du papier</p></div>
           <div>
             <p>Applications installables sur téléphone, tablette ou ordinateur, conçues autour de votre façon de travailler. Elles fonctionnent hors ligne, se synchronisent au besoin et produisent des documents prêts à envoyer.</p>
-            <ul class="chips"><li>Rapports et formulaires</li><li>Suivi de projets</li><li>Calculateurs</li><li>Sites web</li></ul>
+            <ul class="chips"><li>Rapports et formulaires</li><li>Suivi de projets</li><li>Calculateurs</li><li>Outils internes</li></ul>
+          </div>
+        </article>
+        <article class="service">
+          <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="18" r="14"/><path d="M4 18h28M18 4c4 4.5 6 9 6 14s-2 9.5-6 14c-4-4.5-6-9-6-14s2-9.5 6-14zM7 10h22M7 26h22"/></svg>
+          <div><h3>Sites web</h3><p class="for">Pour donner à votre entreprise ou à votre idée la visibilité qu'elle mérite</p></div>
+          <div>
+            <p>Un site clair, rapide et facile à trouver, qui présente ce que vous faites sans jargon. Que ce soit pour lancer une idée, faire connaître un service ou simplement être présent quand un client vous cherche, on part de votre réalité, pas d'un gabarit.</p>
+            <ul class="chips"><li>Site vitrine</li><li>Page de lancement</li><li>Nom de domaine et hébergement</li><li>Mises à jour</li></ul>
           </div>
         </article>
         <article class="service">
@@ -230,11 +242,19 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
           </div>
         </article>
         <article class="service">
+          <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="11" y="11" width="14" height="14" rx="2"/><path d="M15 15h6v6h-6zM11 15H5M11 21H5M31 15h-6M31 21h-6M15 11V5M21 11V5M15 31v-6M21 31v-6"/></svg>
+          <div><h3>Électronique et automatisation</h3><p class="for">Pour que la pièce bouge, mesure ou réagisse</p></div>
+          <div>
+            <p>Un bagage en électromécanique et en automatisation, appliqué à des projets concrets : capteurs, petits contrôleurs, moteurs, éclairage DEL, câblage de contrôle. Souvent, c'est le morceau qui relie une pièce imprimée à une application. Je touche à tout, et je le dis franchement : pour les installations industrielles d'envergure, je travaille avec les bons professionnels.</p>
+            <ul class="chips"><li>Capteurs et contrôleurs</li><li>Moteurs et variateurs</li><li>Montages sur mesure</li><li>Dépannage d'équipement</li></ul>
+          </div>
+        </article>
+        <article class="service">
           <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M22 6a7 7 0 0 0-8.6 8.6L5 23v5h5l8.4-8.4A7 7 0 0 0 27 11l-4 4-4-1-1-4z"/></svg>
           <div><h3>Solutions sur mesure</h3><p class="for">Pour tout ce qui ne rentre dans aucune case</p></div>
           <div>
-            <p>Un processus qui accroche, un équipement mal adapté, une idée qui dort dans un tiroir : on analyse le problème et on assemble ce qu'il faut, logiciel, pièce physique ou les deux.</p>
-            <ul class="chips"><li>Analyse du besoin</li><li>Automatisation</li><li>Adaptation d'équipement</li><li>Conseil</li></ul>
+            <p>Un processus qui accroche, un équipement mal adapté, une idée qui dort dans un tiroir : on analyse le problème et on assemble ce qu'il faut, logiciel, pièce physique, électronique ou les trois.</p>
+            <ul class="chips"><li>Analyse du besoin</li><li>Intégration</li><li>Adaptation d'équipement</li><li>Conseil</li></ul>
           </div>
         </article>
       </div>
@@ -251,7 +271,10 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
         <article class="work"><p class="kind">Application</p><h3>Calculateurs techniques</h3><p>Des calculs normés rendus simples, avec un résultat clair en quelques secondes.</p></article>
         <article class="work"><p class="kind">Application</p><h3>Inspection et inventaire immobilier</h3><p>Visites documentées pièce par pièce et synchronisées avec un serveur.</p></article>
         <article class="work"><p class="kind">Modélisation et impression 3D</p><h3>Pièces et supports fonctionnels</h3><p>Composants dessinés sur mesure puis imprimés pour remplacer, adapter ou améliorer.</p></article>
-        <article class="work"><p class="kind">Sur mesure</p><h3>Projets qui combinent tout</h3><p>Quand un problème demande un peu de code, une pièce physique et de la débrouillardise.</p></article>
+        <article class="work"><p class="kind">Site web</p><h3>Sites vitrines et pages de lancement</h3><p>Une présence en ligne simple et soignée, du nom de domaine à la mise en ligne, sans agence entre les deux.</p></article>
+        <article class="work"><p class="kind">Électronique</p><h3>Montages et éclairage DEL</h3><p>Petits circuits sur mesure, du capteur qui déclenche une action à l'éclairage intégré dans un objet.</p></article>
+        <article class="work"><p class="kind">Automatisation</p><h3>Moteurs, variateurs et contrôle</h3><p>Paramétrage, raccordement et dépannage d'équipement motorisé pour qu'il fasse exactement ce qu'on lui demande.</p></article>
+        <article class="work"><p class="kind">Sur mesure</p><h3>Projets qui combinent tout</h3><p>Quand un problème demande un peu de code, une pièce physique, un circuit et de la débrouillardise.</p></article>
       </div>
     </div>
   </section>
@@ -271,10 +294,10 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
   <section id="methode">
     <div class="wrap">
       <h2 class="sec-title">De l'idée à l'objet</h2>
-      <p class="intro">Que ce soit une application ou une pièce imprimée, le parcours est le même.</p>
+      <p class="intro">Site, application, pièce imprimée ou montage électronique, le parcours est le même.</p>
       <ol class="steps">
         <li><h3>Comprendre</h3><p>On discute du problème réel, de l'usage et des contraintes.</p></li>
-        <li><h3>Concevoir</h3><p>Une première version, logicielle ou 3D, rapidement entre vos mains.</p></li>
+        <li><h3>Concevoir</h3><p>Une première version, logicielle, 3D ou sur table de montage, rapidement entre vos mains.</p></li>
         <li><h3>Ajuster</h3><p>On teste, on corrige, on raffine jusqu'à ce que ça fonctionne vraiment.</p></li>
         <li><h3>Livrer</h3><p>Installation, pièces finales et suivi après la livraison.</p></li>
       </ol>
@@ -307,9 +330,11 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
     {t:"Applications web et mobiles",p:"Des outils qui remplacent le papier et les chiffriers, utilisables au bureau comme sur le terrain, même sans réseau."},
     {t:"Modélisation 3D sur mesure",p:"Pièces, boîtiers et assemblages dessinés à partir d'un croquis, de mesures ou d'une pièce existante."},
     {t:"Impression 3D",p:"Prototypes et pièces fonctionnelles, en un exemplaire ou en petite série."},
-    {t:"Solutions sur mesure",p:"Un problème qui ne rentre dans aucune case ? On combine logiciel et pièces physiques pour le régler."}
+    {t:"Électronique et automatisation",p:"Capteurs, contrôleurs, moteurs et montages sur mesure : le lien entre la pièce, le circuit et l'application."},
+    {t:"Solutions sur mesure",p:"Un problème qui ne rentre dans aucune case ? On combine logiciel, pièces physiques et électronique pour le régler."},
+    {t:"Sites web",p:"Un site clair et rapide pour faire connaître votre entreprise ou lancer une idée, sans jargon ni gabarit."}
   ];
-  var angles=[-45,45,135,225];
+  var angles=[-45,45,90,135,225,270];
   var knob=document.getElementById("knob"), btns=[].slice.call(document.querySelectorAll(".pos"));
   var rCode=document.getElementById("rCode"), rTitle=document.getElementById("rTitle"), rText=document.getElementById("rText");
   var cur=0, rot=-45, auto=null;
@@ -319,17 +344,17 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
     rot+=delta; knob.style.transform="rotate("+rot+"deg)";
     cur=i;
     btns.forEach(function(b){b.setAttribute("aria-checked",String(+b.dataset.i===i));});
-    rCode.textContent="POS "+(i+1)+"/4";
+    rCode.textContent="POS "+(i+1)+"/6";
     rTitle.textContent=data[i].t; rText.textContent=data[i].p;
   }
   function stopAuto(){if(auto){clearInterval(auto);auto=null;}}
   btns.forEach(function(b){b.addEventListener("click",function(){stopAuto();select(+b.dataset.i);});});
-  knob.addEventListener("click",function(){stopAuto();select((cur+1)%4);});
+  knob.addEventListener("click",function(){stopAuto();select((cur+1)%6);});
 
   if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
     var n=0;
     setTimeout(function(){
-      auto=setInterval(function(){n++;select(n%4);if(n>=4)stopAuto();},1100);
+      auto=setInterval(function(){n++;select(n%6);if(n>=6)stopAuto();},950);
     },900);
   }
 
