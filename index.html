@@ -3,9 +3,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#1A1D1F">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='6' fill='%231A1D1F'/%3E%3Crect x='10' y='10' width='20' height='20' rx='2.5' fill='none' stroke='%23F1F2EE' stroke-width='2.2'/%3E%3Cpath d='M10 15h-5M10 20h-5M10 25h-5M30 15h5M30 20h5M30 25h5M15 10v-5M20 10v-5M25 10v-5M15 30v5M20 30v5M25 30v5M14 25h12' fill='none' stroke='%23F1F2EE' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='15' cy='15' r='2.3' fill='%23FFB000'/%3E%3C/svg%3E">
 <title>S.M.D Solutions — Applications, modélisation 3D, impression 3D et solutions sur mesure</title>
 <meta name="description" content="Applications web et mobiles, modélisation 3D, impression 3D et solutions concrètes pour entreprises et particuliers.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,28 +21,40 @@
   --sans:"Archivo",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;
 }
-@media (prefers-color-scheme: light){
-  :root:not([data-theme="dark"]){
-    --bg:#E6E4DF;--panel:#F2F1ED;--line:#C9C6BE;--text:#3A3F42;--strong:#15181A;
-    --muted:#6B7176;--amber:#B87A00;--amber-ink:#FFFFFF;--face:#FBFAF7;--knob:#D9D6CF;
-  }
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#1A1D1F;--panel:#22272A;--line:#343B3F;--text:#C9CED1;--strong:#F1F2EE;
-    --muted:#8A9297;--amber:#FFB000;--amber-ink:#1A1D1F;--face:#15181A;--knob:#2C3236;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#1A1D1F;--panel:#22272A;--line:#343B3F;--text:#C9CED1;--strong:#F1F2EE;
-  --muted:#8A9297;--amber:#FFB000;--amber-ink:#1A1D1F;--face:#15181A;--knob:#2C3236;
-}
-:root[data-theme="light"]{
-  --bg:#E6E4DF;--panel:#F2F1ED;--line:#C9C6BE;--text:#3A3F42;--strong:#15181A;
-  --muted:#6B7176;--amber:#B87A00;--amber-ink:#FFFFFF;--face:#FBFAF7;--knob:#D9D6CF;
-}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
+
+/* Fond : circuit imprimé + grille de dessin technique */
+.bgfx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  -webkit-mask-image:radial-gradient(ellipse 75% 65% at 78% 22%,#000 0%,rgba(0,0,0,.5) 55%,rgba(0,0,0,.3) 100%);
+  mask-image:radial-gradient(ellipse 75% 65% at 78% 22%,#000 0%,rgba(0,0,0,.5) 55%,rgba(0,0,0,.3) 100%)}
+.bgfx::before{content:"";position:absolute;inset:0;opacity:.28;
+  background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+  background-size:40px 40px;background-position:-1px -1px}
+.bgfx svg{position:absolute;inset:0;width:100%;height:100%}
+.bgfx .tr{fill:none;stroke:var(--line);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.bgfx .thin{fill:none;stroke:var(--line);stroke-width:1.2;stroke-linecap:round;stroke-linejoin:round}
+.bgfx .pad{fill:var(--line)}
+.bgfx .hole{fill:var(--bg)}
+.bgfx .chip{fill:var(--panel);stroke:var(--line);stroke-width:1.5}
+.bgfx .lbl{font:500 11px var(--mono);fill:var(--muted);letter-spacing:.06em}
+.bgfx .amb{fill:var(--amber)}
+.bgfx .pulse{animation:padpulse 3.2s ease-in-out infinite}
+.bgfx .sig{fill:none;stroke:var(--amber);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:34 2200;stroke-dashoffset:2234;animation:sig 7s linear infinite;filter:drop-shadow(0 0 3px var(--amber))}
+.bgfx .gear{transform-box:fill-box;transform-origin:center}
+.bgfx .g1{animation:spin 9s linear infinite}
+.bgfx .g2{animation:spin 6.3s linear infinite reverse}
+.bgfx .piston{animation:stroke 2.6s ease-in-out infinite alternate}
+.bgfx .belt{animation:belt 4s linear infinite}
+.bgfx .blink{animation:blink 1.4s steps(2,end) infinite}
+@keyframes padpulse{0%,100%{opacity:.3}50%{opacity:1}}
+@keyframes sig{to{stroke-dashoffset:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes stroke{from{transform:translateX(0)}to{transform:translateX(-62px)}}
+@keyframes belt{from{transform:translateX(400px)}to{transform:translateX(560px)}}
+@keyframes blink{0%{opacity:.25}50%{opacity:1}100%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.bgfx .pulse,.bgfx .sig,.bgfx .gear,.bgfx .piston,.bgfx .belt,.bgfx .blink{animation:none}.bgfx .sig{display:none}}
+header,main,footer{position:relative;z-index:1}
 body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased}
 img,svg{max-width:100%}
 a{color:inherit}
@@ -49,7 +64,7 @@ a{color:inherit}
 header{border-bottom:1px solid var(--line)}
 .bar{display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:68px}
 .brand{display:flex;align-items:center;gap:.7rem;text-decoration:none;color:var(--strong)}
-.brand-mark{width:30px;height:30px;flex:none}
+.brand-mark{width:34px;height:34px;flex:none;margin:-2px}
 .brand b{font-weight:800;font-stretch:125%;letter-spacing:.02em;font-size:1.05rem}
 .brand span{color:var(--muted);font-size:.9rem}
 nav ul{display:flex;gap:clamp(.9rem,2.5vw,2rem);list-style:none;margin:0;padding:0}
@@ -146,20 +161,136 @@ section{padding:clamp(3.5rem,8vw,6rem) 0;border-top:1px solid var(--line)}
 .contact p{margin:0;max-width:32em}
 
 footer{border-top:1px solid var(--line);padding:2rem 0;color:var(--muted);font-size:.9rem}
+footer a{color:var(--muted);text-decoration:none;font-family:var(--mono);font-size:.85rem}
+footer a:hover{color:var(--amber)}
 footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center}
-.theme-toggle{background:none;border:1px solid var(--line);color:var(--text);border-radius:3px;padding:.4rem .8rem;font:500 .85rem var(--sans);cursor:pointer}
-.theme-toggle:hover{border-color:var(--muted)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.knob,.pos .led{transition:none}}
 </style>
 </head>
 <body>
+<div class="bgfx" aria-hidden="true">
+<svg viewBox="0 0 1200 800" preserveAspectRatio="xMaxYMin slice" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pistes -->
+  <g class="tr">
+    <path id="t0" d="M900 320H820L780 280H620"/>
+    <path id="t1" d="M900 360H800L760 400H640"/>
+    <path id="t2" d="M900 400H840L800 440V540L760 580H700"/>
+    <path id="t3" d="M1020 320H1100L1140 280H1220"/>
+    <path id="t4" d="M1020 360H1220"/>
+    <path id="t5" d="M1020 400H1080L1120 440V600"/>
+    <path id="t6" d="M920 300V220L880 180H700L660 140V40"/>
+    <path id="t7" d="M960 300V160L1000 120H1220"/>
+    <path id="t8" d="M1000 300V240L1040 200H1160L1200 160V-20"/>
+    <path id="t9" d="M920 420V500L880 540H840L800 580V700"/>
+    <path id="t10" d="M960 420V640L1000 680H1220"/>
+    <path id="t11" d="M1000 420V480L1040 520H1100L1140 560V820"/>
+    <path id="t12" d="M-20 100H200L240 140H400L440 100H520"/>
+    <path id="t13" d="M-20 480H120L160 520H300L340 480V380"/>
+    <path id="t14" d="M60 -20V200L100 240V340"/>
+    <path id="t15" d="M300 820V700L340 660H480L520 620H600"/>
+    <path id="t16" d="M500 820V740L540 700H620"/>
+  </g>
+  <!-- Signaux -->
+  <use href="#t0" class="sig" style="animation-duration:6.5s;animation-delay:0.0s"/>
+  <use href="#t1" class="sig" style="animation-duration:7.2s;animation-delay:5.3s"/>
+  <use href="#t2" class="sig" style="animation-duration:5.8s;animation-delay:3.6s"/>
+  <use href="#t3" class="sig" style="animation-duration:8.1s;animation-delay:1.9s"/>
+  <use href="#t4" class="sig" style="animation-duration:6.1s;animation-delay:0.2s"/>
+  <use href="#t5" class="sig" style="animation-duration:7.6s;animation-delay:5.5s"/>
+  <use href="#t6" class="sig" style="animation-duration:5.5s;animation-delay:3.8s"/>
+  <use href="#t7" class="sig" style="animation-duration:8.4s;animation-delay:2.1s"/>
+  <use href="#t8" class="sig" style="animation-duration:6.9s;animation-delay:0.4s"/>
+  <use href="#t9" class="sig" style="animation-duration:7.0s;animation-delay:5.7s"/>
+  <use href="#t10" class="sig" style="animation-duration:6.3s;animation-delay:4.0s"/>
+  <use href="#t11" class="sig" style="animation-duration:7.8s;animation-delay:2.3s"/>
+  <use href="#t12" class="sig" style="animation-duration:6.6s;animation-delay:0.6s"/>
+  <use href="#t13" class="sig" style="animation-duration:5.9s;animation-delay:5.9s"/>
+  <use href="#t14" class="sig" style="animation-duration:8.0s;animation-delay:4.2s"/>
+  <use href="#t15" class="sig" style="animation-duration:7.3s;animation-delay:2.5s"/>
+  <use href="#t16" class="sig" style="animation-duration:6.2s;animation-delay:0.8s"/>
+  <!-- Composant -->
+  <rect class="chip" x="900" y="300" width="120" height="120" rx="4"/>
+  <circle class="hole" cx="912" cy="312" r="3.5"/>
+  <text class="lbl" x="960" y="365" text-anchor="middle">S.M.D</text>
+  <g class="thin">
+    <path d="M900 320h-8M900 360h-8M900 400h-8M1020 320h8M1020 360h8M1020 400h8M920 300v-8M960 300v-8M1000 300v-8M920 420v8M960 420v8M1000 420v8"/>
+  </g>
+  <!-- Vias -->
+  <g class="pad">
+    <circle cx="240" cy="140" r="4"/><circle cx="780" cy="280" r="4"/><circle cx="1120" cy="440" r="4"/>
+    <circle cx="160" cy="520" r="4"/><circle cx="1040" cy="200" r="4"/><circle cx="880" cy="540" r="4"/>
+  </g>
+  <!-- Pastilles fixes -->
+  <g class="pad">
+    <circle cx="640" cy="400" r="7"/><circle cx="700" cy="580" r="7"/><circle cx="520" cy="100" r="7"/>
+    <circle cx="100" cy="340" r="7"/><circle cx="600" cy="620" r="7"/><circle cx="620" cy="700" r="7"/>
+  </g>
+  <g class="hole">
+    <circle cx="640" cy="400" r="2.5"/><circle cx="700" cy="580" r="2.5"/><circle cx="520" cy="100" r="2.5"/>
+    <circle cx="100" cy="340" r="2.5"/><circle cx="600" cy="620" r="2.5"/><circle cx="620" cy="700" r="2.5"/>
+  </g>
+  <!-- Pastilles ambrées qui pulsent (voyants) -->
+  <g class="amb">
+    <circle class="pulse" cx="620" cy="280" r="7" style="animation-delay:0s"/>
+    <circle class="pulse" cx="660" cy="40" r="7" style="animation-delay:-1.1s"/>
+    <circle class="pulse" cx="800" cy="700" r="7" style="animation-delay:-2.2s"/>
+    <circle class="pulse" cx="340" cy="380" r="7" style="animation-delay:-.7s"/>
+    <circle class="pulse" cx="1120" cy="600" r="7" style="animation-delay:-1.8s"/>
+  </g>
+  <g class="hole">
+    <circle cx="620" cy="280" r="2.5"/><circle cx="660" cy="40" r="2.5"/><circle cx="800" cy="700" r="2.5"/>
+    <circle cx="340" cy="380" r="2.5"/><circle cx="1120" cy="600" r="2.5"/>
+  </g>
+  <!-- Mécanique automatisée -->
+  <g class="thin gear g1"><path d="M729.9 742.3 L729.9 747.7 L722.7 748.9 L721.6 753.0 L727.2 757.6 L724.5 762.3 L717.7 759.7 L714.7 762.7 L717.3 769.5 L712.6 772.2 L708.0 766.6 L703.9 767.7 L702.7 774.9 L697.3 774.9 L696.1 767.7 L692.0 766.6 L687.4 772.2 L682.7 769.5 L685.3 762.7 L682.3 759.7 L675.5 762.3 L672.8 757.6 L678.4 753.0 L677.3 748.9 L670.1 747.7 L670.1 742.3 L677.3 741.1 L678.4 737.0 L672.8 732.4 L675.5 727.7 L682.3 730.3 L685.3 727.3 L682.7 720.5 L687.4 717.8 L692.0 723.4 L696.1 722.3 L697.3 715.1 L702.7 715.1 L703.9 722.3 L708.0 723.4 L712.6 717.8 L717.3 720.5 L714.7 727.3 L717.7 730.3 L724.5 727.7 L727.2 732.4 L721.6 737.0 L722.7 741.1Z"/><circle cx="700" cy="745" r="6"/></g>
+  <g class="thin gear g2"><path d="M770.8 742.1 L770.8 747.9 L764.5 748.8 L762.9 752.6 L766.7 757.7 L762.7 761.7 L757.6 757.9 L753.8 759.5 L752.9 765.8 L747.1 765.8 L746.2 759.5 L742.4 757.9 L737.3 761.7 L733.3 757.7 L737.1 752.6 L735.5 748.8 L729.2 747.9 L729.2 742.1 L735.5 741.2 L737.1 737.4 L733.3 732.3 L737.3 728.3 L742.4 732.1 L746.2 730.5 L747.1 724.2 L752.9 724.2 L753.8 730.5 L757.6 732.1 L762.7 728.3 L766.7 732.3 L762.9 737.4 L764.5 741.2Z"/><circle cx="750" cy="745" r="5"/></g>
+  <g class="thin">
+    <rect x="250" y="236" width="110" height="28" rx="3"/>
+    <path d="M244 244v12M366 244v12M250 250h-6M250 250v0"/>
+    <path d="M300 226v-26L340 160H480L520 120" stroke-dasharray="3 4"/>
+  </g>
+  <g class="thin piston">
+    <path d="M360 250h70"/>
+    <rect x="428" y="240" width="18" height="20" rx="2"/>
+    <circle class="amb" cx="437" cy="250" r="2.5"/>
+  </g>
+  <g class="thin">
+    <path d="M400 790H1220M400 776H1220"/>
+    <path d="M400 776v14M1220 776v14"/>
+  </g>
+  <g class="thin belt">
+    <rect x="0" y="766" width="26" height="10" rx="1"/>
+    <rect x="160" y="766" width="26" height="10" rx="1"/>
+    <rect x="320" y="766" width="26" height="10" rx="1"/>
+    <rect x="480" y="766" width="26" height="10" rx="1"/>
+    <rect x="640" y="766" width="26" height="10" rx="1"/>
+  </g>
+  <!-- Bloc voyants sur la puce -->
+  <g class="amb">
+    <rect class="blink" x="930" y="385" width="8" height="5" style="animation-delay:0s"/>
+    <rect class="blink" x="942" y="385" width="8" height="5" style="animation-delay:-.6s"/>
+    <rect class="blink" x="954" y="385" width="8" height="5" style="animation-delay:-1.2s"/>
+    <rect class="blink" x="966" y="385" width="8" height="5" style="animation-delay:-.3s"/>
+    <rect class="blink" x="978" y="385" width="8" height="5" style="animation-delay:-.9s"/>
+  </g>
+  <!-- Clin d'œil 3D / CAO : cube filaire et cote -->
+  <g class="thin">
+    <path d="M180 560l52 30-52 30-52-30zM232 590v60l-52 30-52-30v-60M180 620v60"/>
+    <path d="M180 575v90" stroke-dasharray="3 4"/>
+    <path d="M110 700h140M110 694v12M250 694v12"/>
+  </g>
+  <text class="lbl" x="180" y="718" text-anchor="middle">140.00</text>
+  <text class="lbl" x="1074" y="612" text-anchor="middle">V1.6</text>
+</svg>
+</div>
 <header>
   <div class="wrap bar">
     <a class="brand" href="#top" aria-label="S.M.D Solutions, accueil">
-      <svg class="brand-mark" viewBox="0 0 30 30" aria-hidden="true">
-        <rect x="1" y="1" width="28" height="28" rx="3" fill="none" stroke="currentColor" stroke-width="2"/>
-        <path d="M7 20 L7 10 L15 10 L15 20 L23 20 L23 10" fill="none" stroke="var(--amber)" stroke-width="2.4" stroke-linejoin="round"/>
-        <circle cx="7" cy="20" r="2.2" fill="var(--amber)"/><circle cx="23" cy="10" r="2.2" fill="var(--amber)"/>
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <rect x="10" y="10" width="20" height="20" rx="2.5" fill="none" stroke="currentColor" stroke-width="2.2"/>
+        <path d="M10 15h-5M10 20h-5M10 25h-5M30 15h5M30 20h5M30 25h5M15 10v-5M20 10v-5M25 10v-5M15 30v5M20 30v5M25 30v5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="15" cy="15" r="2.3" fill="var(--amber)"/>
+        <path d="M14 25h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </svg>
       <b>S.M.D</b><span>Solutions</span>
     </a>
@@ -245,7 +376,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
           <svg viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="11" y="11" width="14" height="14" rx="2"/><path d="M15 15h6v6h-6zM11 15H5M11 21H5M31 15h-6M31 21h-6M15 11V5M21 11V5M15 31v-6M21 31v-6"/></svg>
           <div><h3>Électronique et automatisation</h3><p class="for">Pour que la pièce bouge, mesure ou réagisse</p></div>
           <div>
-            <p>Un bagage en électromécanique et en automatisation, appliqué à des projets concrets : capteurs, petits contrôleurs, moteurs, éclairage DEL, câblage de contrôle. Souvent, c'est le morceau qui relie une pièce imprimée à une application. Je touche à tout, et je le dis franchement : pour les installations industrielles d'envergure, je travaille avec les bons professionnels.</p>
+            <p>Un bagage en électromécanique et en automatisation, appliqué à des projets concrets : capteurs, petits contrôleurs, moteurs, éclairage DEL, câblage de contrôle. Souvent, c'est le morceau qui relie une pièce imprimée à une application.</p>
             <ul class="chips"><li>Capteurs et contrôleurs</li><li>Moteurs et variateurs</li><li>Montages sur mesure</li><li>Dépannage d'équipement</li></ul>
           </div>
         </article>
@@ -320,7 +451,7 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
 <footer>
   <div class="wrap">
     <span>© <span id="yr">2026</span> S.M.D Solutions, Québec</span>
-    <button class="theme-toggle" id="themeBtn" type="button">Changer de thème</button>
+    <a href="mailto:solutionsmeodesign@gmail.com">solutionsmeodesign@gmail.com</a>
   </div>
 </footer>
 
@@ -359,13 +490,6 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;
   }
 
   document.getElementById("yr").textContent=new Date().getFullYear();
-  var root=document.documentElement, tb=document.getElementById("themeBtn");
-  try{var s=localStorage.getItem("smd-theme");if(s)root.setAttribute("data-theme",s);}catch(e){}
-  tb.addEventListener("click",function(){
-    var c=root.getAttribute("data-theme")||(matchMedia("(prefers-color-scheme: light)").matches?"light":"dark");
-    var nx=c==="light"?"dark":"light";root.setAttribute("data-theme",nx);
-    try{localStorage.setItem("smd-theme",nx);}catch(e){}
-  });
 })();
 </script>
 </body>
